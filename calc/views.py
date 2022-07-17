@@ -9,8 +9,9 @@ def index(request):
 def search(request):
     if request.method == 'POST':
         link = request.POST['link']
-        search_result = webbrowser.open("https://www.google.com/search?q={}".format(link))
-        return search_result
+        search_result = webbrowser.open("https://www.google.com/search?q={}".format(link))        
+        return render(request,search_result)
+
         
 
 def youtube(request):
