@@ -9,8 +9,8 @@ def index(request):
 def search(request):
     if request.method == 'POST':
         link = request.POST['link']
-        webbrowser.open("https://www.google.com/search?q={}".format(link))
-        return render(request,"search.html")
+        search_result = webbrowser.open("https://www.google.com/search?q={}".format(link))
+        return search_result
         
 
 def youtube(request):
@@ -26,13 +26,15 @@ def youtube(request):
         except:            
             # print("Connection error")
             return render(request, 'youtube.html', {"variable1": "Connection error"})
-  
+
+        # setting path
+        SAVE_PATH = "E:/"  
         # setting video resolution
         stream = video.streams.get_by_resolution(resolution)
           
         # downloads video
         try:
-            stream.download()
+            stream.download(SAVE_PATH)
         except:            
             # print("ERROR!!!")
             return render(request, 'youtube.html', {"variable2": "could not download"})
